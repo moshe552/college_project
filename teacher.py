@@ -3,6 +3,7 @@ from person import Person
 
 class Teachers(Person):
 
-    def __init__(self, name, phone, email, lst):
+    def __init__(self, name, phone, email, salary):
         super().__init__(name, phone, email)
-        lst.append(self)
+        self.__salary = salary
+
