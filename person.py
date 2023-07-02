@@ -9,6 +9,7 @@ class Person:
         self.__phone = phone
         self.__email = email
         self.__id = Person.id_auto_increment
+        self.courses = {}
         Person.id_auto_increment += 1
 
     @property
