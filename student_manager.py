@@ -10,5 +10,16 @@ class StudentManager(ManagementCollection):
     def add(self, student: Student):
         super().add(student)
 
-    def add_grade(self, student, grade):
-        pass
+    def set_grade(self, student_id, course, grade):
+        self.dict[student_id].grades[course] = grade
+
+    def get_grade(self, student_id, course):
+        return self.dict[student_id].grades[course]
+
+    def average(self, student_id):
+        student = self.dict[student_id]
+        grades = student.grades
+        grades_sum = sum(grades.values())
+        num_of_courses = len(grades)
+        return grades_sum // num_of_courses
+

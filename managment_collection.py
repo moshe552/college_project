@@ -1,23 +1,25 @@
-from person import Person
-
-
 class ManagementCollection:
     """
     A collection of methods for dict management.
     """
     def __init__(self):
-        self.__dict = {}
+        self.dict_of_things = {}
 
-    def add(self, person: Person):
-        self.__dict[person.id] = person
+    @property
+    def dict(self):
+        return self.dict_of_things
 
-    def get(self, person):
-        return person  # to use the __reaper__ in order to get all the details.
+    def add(self, instance):
+        self.dict[instance.id] = instance
 
-    def remove(self, person):
-        del self.__dict[person.id]
+    def get(self, instance):
+        return self.dict[instance]
 
-    def print_all(self, _id):
-        print(self.__dict[_id])  # to use __reaper__ or __str__
+    def remove(self, instance):
+        del self.dict[instance]
+
+    def print_all(self, id_):
+        print(self.dict[id_])
+
 
 
