@@ -1,14 +1,10 @@
-from college import College
-from student import Student
+ascii_art = '''
+  ____                 _               _____   _             _     
+ |  _ \               | |             |  __ \ (_)           | |    
+ | |_) | __ _ ___  ___| | _____ _ __  | |__) |_ _ __   __ _| |__  
+ |  _ < / _` / __|/ _ \ |/ / _ \ '__| |  ___/| | '_ \ / _` | '_ \ 
+ | |_) | (_| \__ \  __/   <  __/ |    | |    | | | | | (_| | | | |
+ |____/ \__,_|___/\___|_|\_\___|_|    |_|    |_|_| |_|\__,_|_| |_|
+'''
 
-
-mivchar = College('Mivchar')
-mivchar.student_manager.add(Student('Moshe', '0543332221', 'Moshe@gmail.com'))
-mivchar.student_manager.add(Student('Yosi', '0543332222', 'Yosi@gmail.com'))
-mivchar.student_manager.set_grade(1, 'math', 100)
-mivchar.student_manager.set_grade(1, 'science', 90)
-mivchar.student_manager.set_grade(1, 'english', 80)
-print(mivchar.student_manager.get_grade(1, 'english'))
-
-print('bbb')
-print('hi')
+print(ascii_art)
