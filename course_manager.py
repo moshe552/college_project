@@ -16,8 +16,7 @@ class CourseManager(ManagementCollection):
 
     def add_teacher(self, course_id: int, teacher_id: int):
         """
-        Replacing the course teacher.
-        :param teacher_id:
+        Adding or replacing the course teacher.
         :param course_id: The key of course instance.
         :param teacher_id: The id of the teacher.
         :return: None
