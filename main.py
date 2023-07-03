@@ -38,21 +38,20 @@ def main():
          Please enter your choice:  """))
         if choice == 1:
             choice = int(input("""
-         1. add student
-         2. remove student
+         1. Add student
+         2. Remove student
          3. Show student details
-         4. edit student details
-         5. student grades
+         4. Edit student details
+         5. Student grades
          6. Show students courses
          7. Back to main menu
          8. Exit program
          Please enter your choice:  """))
             if choice == 1:
                 print("Enter student details:")
-                name = input("Please enter the student name: ")
-                phone = input("Please enter the student phone number: ")
-                email = input("Please enter the student email: ")
-                student_manager.add(Student(name, phone, email))
+                student_manager.add(Student(input("Please enter the student name: "),
+                                            input("Please enter the student phone number: "),
+                                            input("Please enter the student email: ")))
                 continue
             if choice == 2:
                 student_manager.remove(int(input("Please enter the student ID: ")))
@@ -68,13 +67,13 @@ def main():
                 5. Exit program
                  Please enter your choice:  """))
                 if choice == 1:
-                    pass
+                    student_manager.name(input("Please enter the student name: "))
                     continue
                 if choice == 2:
-                    pass
+                    student_manager.name(input("Please enter the student phone number: "))
                     continue
                 if choice == 3:
-                    pass
+                    student_manager.name(input("Please enter the student email: "))
                     continue
                 if choice == 4:
                     continue
@@ -89,54 +88,72 @@ def main():
                                 5. Exit program
                                 Please enter your choice:  """))
                 if choice == 1:
-                    pass
+                    student_manager.set_grade(int(input("Please enter the student ID: ")),
+                                              input("Please enter the course name: "),
+                                              input("Please enter the grade: ") )
                     continue
                 if choice == 2:
-                    pass
+                    student_manager.get_grade(int(input("Please enter the student ID: ")),
+                                              input("Please enter the course name: "))
                     continue
                 if choice == 3:
-                    pass
+                    student_manager.average(int(input("Please enter the student ID: ")))
                     continue
                 if choice == 4:
                     continue
                 if choice == 5:
                     break
             if choice == 6:
-                pass
+                student_manager.show_courses(int(input("Please enter the student ID: ")))
                 continue
             if choice == 7:
-                pass
                 continue
             if choice == 8:
-                continue
-            if choice == 9:
                 break
+
         if choice == 2:
             choice = int(input("""
-                     1. add teacher
-                     2. remove teacher
+                     1. Add teacher
+                     2. Remove teacher
                      3. Show teacher details
-                     4. edit teacher details
+                     4. Edit teacher details
                      5. Show teachers courses
                      6. Back to main menu
                      7. Exit program
                      Please enter your choice:  """))
             if choice == 1:
-                pass
+                teacher_manager.add(Teacher(input("Please enter the teacher name: "),
+                                            input("Please enter the teacher phone number: "),
+                                            input("Please enter the teacher email: ")))
                 continue
             if choice == 2:
-                pass
+                teacher_manager.remove(int(input("Please enter the teacher ID: ")))
                 continue
             if choice == 3:
                 print(student_manager.get(int(input("Enter the student ID: "))))
             if choice == 4:
                 choice = int(input("""
-                            1. Edit student name
-                            2. Edit student phone
-                            3. Edit student email
+                            1. Edit teacher name
+                            2. Edit teacher phone
+                            3. Edit teacher email
+                            4. Back to main menu
+                            5. Exit program
                             Please enter your choice:  """))
+                if choice == 1:
+                    teacher_manager.name(input("Please enter the teacher name: "))
+                    continue
+                if choice == 2:
+                    teacher_manager.name(input("Please enter the teacher phone number: "))
+                    continue
+                if choice == 3:
+                    teacher_manager.name(input("Please enter the teacher email: "))
+                    continue
+                if choice == 4:
+                    continue
+                if choice == 5:
+                    break
             if choice == 5:
-                pass
+                teacher_manager.show_courses(int(input("Please enter the teacher ID: ")))
                 continue
             if choice == 6:
                 continue
@@ -144,23 +161,23 @@ def main():
                 break
         if choice == 3:
             choice = int(input("""
-                                 1. add course
-                                 2. remove course
-                                 3. Set course name 
-                                 4. Show course details
+                                 1. Add course
+                                 2. Remove course
+                                 3. Edit course name
+                                 4. Show course details 
                                  5. Edit teacher
                                  6. Edit student
                                  7. Back to main menu
                                  8. Exit program
                                  Enter your choice:  """))
             if choice == 1:
-                pass
+                course_manager.add(Course(input("Please enter the course name: ")))
                 continue
             if choice == 2:
-                pass
+                course_manager.remove(int(input("Please enter the course ID: ")))
                 continue
             if choice == 3:
-                pass
+                print(course_manager.name(int(input("Enter the course ID: "))))
                 continue
             if choice == 4:
                 choice = int(input("""
@@ -173,19 +190,21 @@ def main():
                           7. Exit program
                           Enter your choice:  """))
                 if choice == 1:
-                    pass
+                    print(course_manager.get(int(input("Enter the course ID: "))))
                     continue
                 if choice == 2:
-                    pass
+                    print()
                     continue
                 if choice == 3:
-                    pass
+                    print(course_manager.get_course_items(int(input("Enter the course ID: "))),
+                          "teacher")
                     continue
                 if choice == 4:
-                    pass
+                    print(course_manager.get_course_items(int(input("Enter the course ID: "))),
+                          "students")
                     continue
                 if choice == 5:
-                    pass
+                    print(course_manager.average(input("Enter the course ID: ")))
                     continue
                 if choice == 6:
                     continue
@@ -198,10 +217,12 @@ def main():
                                           4. Exit program
                                           Enter your choice:  """))
                 if choice == 1:
-                    pass
+                    course_manager.add_teacher(int(input("Enter the course ID: "),
+                                               int(input("Enter the teacher ID: "))))
                     continue
                 if choice == 2:
-                    pass
+                    course_manager.set_teacher(int(input("Enter the course ID: "),
+                                               int(input("Enter the teacher ID: "))))
                     continue
                 if choice == 3:
                     continue
@@ -215,10 +236,12 @@ def main():
                                           4. Exit program
                                           Enter your choice:  """))
                 if choice == 1:
-                    pass
+                    course_manager.add_student(int(input("Enter the course ID: "),
+                                               int(input("Enter the teacher ID: "))))
                     continue
                 if choice == 2:
-                    pass
+                    course_manager.set_teacher(int(input("Enter the course ID: "),
+                                               int(input("Enter the student ID: "))))
                     continue
                 if choice == 3:
                     continue

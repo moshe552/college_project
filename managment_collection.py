@@ -20,7 +20,9 @@ class ManagementCollection:
     def removing(self, instance_id: int, dictionary: dict):
         del dictionary[instance_id]
 
-
+    def show_courses(self, item_id):
+        for val in item_id.courses.values():
+            print(val.name)
 
 
 

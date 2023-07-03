@@ -26,6 +26,8 @@ class CourseManager(ManagementCollection):
 
     def add_teacher(self, course_id: int, teacher_id: int):
         """
+        לדעתי ניתן לאחד את הפונקצייה הזאת שתשמש גם את סטודנט וגם את המרצה,
+         יתכן וניתן אף לאחד את הקלאסים לperson_manager
         Adding teacher to the course.
         :param course_id: The key of course instance.
         :param teacher_id: The id of the teacher.
@@ -46,15 +48,15 @@ class CourseManager(ManagementCollection):
         #  Adds the course instance to the new teacher courses dictionary.
         self.add_teacher(course_id, teacher_id)
 
-    def get_students(self, course_id: int):
+    def get_course_items(self, course_id: int, items):
         """
-        Gets the dictionary of students in the course that contains the instances of students.
+        Gets the dictionary of items in the course that contains the instances of items.
         :param course_id: The key of the course instance.
-        :return: Dictionary of the course students
+        :return: Dictionary of the course items
         :type: dict
         """
         course = self.get(course_id)
-        return course.students
+        return course.items
 
     def add_student(self, course_id: int, student_id: int):
         """
@@ -85,4 +87,10 @@ class CourseManager(ManagementCollection):
         student_courses = self.student_manager.dict_of_items[student_id].courses
         self.removing_course(course_id, student_courses)
 
+    def average(self, course_id):
+        course = self.dict_of_items[course_id]
+        grades = course.student.grades
+        grades_sum = sum(grades.values())
+        num_of_students = len(grades)
+        return grades_sum // num_of_students
 
