@@ -12,47 +12,89 @@ def main():
     course_manager = mivchar.course_manager
 
     #  creating Courses instances
-    course_manager.add(Course('Math'))
-    course_manager.add(Course('English'))
-    course_manager.add(Course('Computer science'))
+    math_1 = Course('Math')
+    course_manager.add(math_1)
+    english_1 = Course('English')
+    course_manager.add(english_1)
+    comp_scie_1 = Course('Computer science')
+    course_manager.add(comp_scie_1)
+    comp_scie_2 = Course('Computer science')
+    course_manager.add(comp_scie_2)
 
     #  creating Teachers instances
-    teacher_manager.add(Teacher('Barak', '0546839475', 'barak@gmail.com', 85000))
-    teacher_manager.add(Teacher('Avi', '0546839999', 'avi@gmail.com', 30000))
-    teacher_manager.add(Teacher('Elad', '054685555', 'elad@gmail.com', 20000))
+    barak = Teacher('Barak', '0546839475', 'barak@gmail.com', 85000)
+    teacher_manager.add(barak)
+    avi = Teacher('Avi', '0546839999', 'avi@gmail.com', 30000)
+    teacher_manager.add(avi)
+    elad = Teacher('Elad', '054685555', 'elad@gmail.com', 20000)
+    teacher_manager.add(elad)
 
     #  adding teacher to the course
-    course_manager.add_teacher(1, 2)
-    course_manager.add_teacher(2, 3)
-    course_manager.add_teacher(3, 1)
+    course_manager.add_teacher(math_1.id, avi.id)
+    course_manager.add_teacher(english_1.id, elad.id)
+    course_manager.add_teacher(comp_scie_1.id, barak.id)
+    course_manager.add_teacher(comp_scie_2.id, barak.id)
 
     #  shows the teacher courses:
+    # print(barak.courses)
+    # print(barak.courses[3])
+    # for val in barak.courses.values():
+    #     print(val.name)
 
-    #
-    # #  creating Students instances
-    # student_manager.add(Student('Moshe', '0543332111', 'moshe@gmail.com'))
-    # student_manager.add(Student('Yosi', '0543332222', 'yosi@gmail.com'))
-    # student_manager.add(Student('Idan', '0543332333', 'idan@gmail.com'))
-    # student_manager.add(Student('Aviv', '0543332444', 'aviv@gmail.com'))
-    # student_manager.add(Student('Yakov', '0543332555', 'Yakov@gmail.com'))
-    #
+    #  Replacing a teacher in a course:
+    course_manager.set_teacher(english_1.id, barak.id)
+
+    #  creating Students instances
+    moshe = Student('Moshe', '0543332111', 'moshe@gmail.com')
+    student_manager.add(moshe)
+    yosi = Student('Yosi', '0543332222', 'yosi@gmail.com')
+    student_manager.add(yosi)
+    idan = Student('Idan', '0543332333', 'idan@gmail.com')
+    student_manager.add(idan)
+    aviv = Student('Aviv', '0543332444', 'aviv@gmail.com')
+    student_manager.add(aviv)
+    yakov = Student('Yakov', '0543332555', 'Yakov@gmail.com')
+    student_manager.add(yakov)
+
+    # Shows students details:
+    # stu_dict = student_manager.dict_of_things
+    # for val in stu_dict.values():
+    #     print(val)
+
+    # Removing a student from college:
+    student_manager.remove(yosi.id)
+
     # #  Adds a student to a course:
-    # course_manager.add_student(1, 4)
-    # course_manager.add_student(1, 5)
-    # course_manager.add_student(1, 7)
-    # course_manager.add_student(2, 4)
-    # course_manager.add_student(2, 6)
-    # course_manager.add_student(3, 4)
-    # course_manager.add_student(3, 5)
-    # course_manager.add_student(3, 8)
-    #
-    # #  Gets the course-students dictionary:
-    # course_manager.get_students(1)
-    # course_manager.get_students(2)
-    # course_manager.get_students(3)
-    #
-    # #  Removing a student from course:
-    # course_manager.remove_student(1, 7)
+    course_manager.add_student(math_1.id, moshe.id)
+    course_manager.add_student(math_1.id, idan.id)
+    course_manager.add_student(math_1.id, aviv.id)
+    course_manager.add_student(english_1.id, moshe.id)
+    course_manager.add_student(english_1.id, idan.id)
+    course_manager.add_student(comp_scie_1.id, moshe.id)
+    course_manager.add_student(comp_scie_2.id, idan.id)
+    course_manager.add_student(comp_scie_2.id, yakov.id)
+
+    #  Shows the course-students details:
+    # math_students = course_manager.dict_of_items[math_1.id].students
+    # counter = 1
+    # for val in math_students.values():
+    #     print("Math student num", counter, ": ", val)
+    #     counter += 1
+    # english_students = course_manager.dict_of_items[english_1.id].students
+    # counter = 1
+    # for val in english_students.values():
+    #     print("English student num", counter, ": ", val)
+    # comp_sien_1_students = course_manager.dict_of_items[comp_scie_1.id].students
+    # counter = 1
+    # for val in comp_sien_1_students.values():
+    #     print("Computer science 1 student num", counter, ": ", val)
+    # comp_sien_2_students = course_manager.dict_of_items[comp_scie_2.id].students
+    # counter = 1
+    # for val in comp_sien_2_students.values():
+    #     print("Computer science 2 student num", counter, ": ", val)
+
+    #  Removing a student from course:
+    course_manager.remove_student(math_1.id, aviv.id)
     #
     # #  replacing the teacher in the course:
     # course_manager.set_teacher(2, 1)

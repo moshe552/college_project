@@ -10,7 +10,7 @@ class College:
         self.__name = name
         self.student_manager = StudentManager()
         self.teacher_manager = TeacherManager()
-        self.course_manager = CourseManager(self.student_manager)
+        self.course_manager = CourseManager(self.student_manager, self.teacher_manager)
 
     @property
     def name(self):
