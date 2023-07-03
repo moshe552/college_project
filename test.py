@@ -10,3 +10,4 @@ mivchar.student_manager.set_grade(1, 'science', 90)
 mivchar.student_manager.set_grade(1, 'english', 80)
 print(mivchar.student_manager.get_grade(1, 'english'))
 
+print('bbb')
