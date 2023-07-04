@@ -13,11 +13,11 @@ def main():
 
     while True:
         choice = int(input("""Welcome to Mivchar!
-                                 1. Manage students
-                                 2. Manage teachers
-                                 3. Manage courses
-                                 4. Exit program
-                                 Please enter your choice:  """))
+     1. Manage students
+     2. Manage teachers
+     3. Manage courses
+     4. Exit program
+     Please enter your choice:  """))
         if choice == 1:
             choice = int(input("""
          1. Add student
@@ -164,7 +164,8 @@ def main():
                 course_manager.remove(int(input("Please enter the course ID: ")))
                 continue
             if choice == 3:
-                print(course_manager.name(int(input("Enter the course ID: "))))
+                course = course_manager.get(int(input("Please enter the course ID: ")))
+                course.name = input("Enter the course name: ")
                 continue
             if choice == 4:
                 choice = int(input("""
@@ -180,7 +181,7 @@ def main():
                     print(course_manager.get(int(input("Enter the course ID: "))))
                     continue
                 if choice == 2:
-                    print()
+                    course_manager.print_items()
                     continue
                 if choice == 3:
                     print(course_manager.get_course_items(int(input("Enter the course ID: "))),
