@@ -28,7 +28,3 @@ class ManagementCollection:
         if item_id not in self.dict_of_items:
             return False
         return True
-
-    def print_items(self):
-        for item in self.dict_of_items.values():
-            print(item)
