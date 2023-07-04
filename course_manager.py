@@ -26,17 +26,15 @@ class CourseManager(ManagementCollection):
 
     def add_teacher(self, course_id: int, teacher_id: int):
         """
-        לדעתי ניתן לאחד את הפונקצייה הזאת שתשמש גם את סטודנט וגם את המרצה,
-         יתכן וניתן אף לאחד את הקלאסים לperson_manager
         Adding teacher to the course.
         :param course_id: The key of course instance.
         :param teacher_id: The id of the teacher.
         :return: None
         """
-        course = self.dict_of_items[course_id]
+        course = self.get(course_id)
         course.teacher_id = teacher_id
         #  Adds the course instance to the teacher courses dictionary.
-        teacher_courses = self.teacher_manager.dict_of_items[teacher_id].courses
+        teacher_courses = self.teacher_manager.get(teacher_id).courses
         self.adding_course(course, teacher_courses)
 
     def set_teacher(self, course_id: int, teacher_id: int):
@@ -48,29 +46,21 @@ class CourseManager(ManagementCollection):
         #  Adds the course instance to the new teacher courses dictionary.
         self.add_teacher(course_id, teacher_id)
 
-    def get_course_items(self, course_id: int, items):
-        """
-        Gets the dictionary of items in the course that contains the instances of items.
-        :param course_id: The key of the course instance.
-        :return: Dictionary of the course items
-        :type: dict
-        """
-        course = self.get(course_id)
-        return course.items
-
     def add_student(self, course_id: int, student_id: int):
         """
-        Adding a student instance to the students-course dictionary using the get_student() method.
+        Adding a student instance to the course students dictionary,
+        and the course to the student courses,
+        and the course ID to the student grades.
         :param course_id: The key of the course instance.
         :param student_id: The variable(key) of the Student instance.
         :return: None
         """
         all_students = self.student_manager.dict_of_items
         student = all_students[student_id]
-        course_students = self.get_students(course_id)
+        course = self.get(course_id)
+        course_students = course.students
         course_students[student.id] = student
         #  Adds the course instance to the student courses dictionary.
-        course = self.dict_of_items[course_id]
         self.adding_course(course, student.courses)
         #  Adds the course ID to the student grades
         self.student_manager.set_grade(student_id, course_id, 0)
@@ -91,6 +81,7 @@ class CourseManager(ManagementCollection):
         #  Removing the course from student grades
         student = self.student_manager.get(student_id)
         del student.grades[course_id]
+
     def course_average_grades(self, course_id):
         course = self.get(course_id)
         students = course.students

@@ -43,7 +43,7 @@ def main():
                 print(student_manager.get(int(input("Enter the student ID: "))))
                 continue
             if choice == 4:
-                pass
+                student_manager.print_items()
                 continue
             if choice == 5:
                 choice = int(input("""
@@ -54,15 +54,15 @@ def main():
                 5. Exit program
                  Please enter your choice:  """))
                 if choice == 1:
-                    student = student_manager.dict_of_items[int(input("Please enter the student ID: "))]
+                    student = student_manager.get(int(input("Please enter the student ID: ")))
                     student.name = input("Please enter the new student name: ")
                     continue
                 if choice == 2:
-                    student = student_manager.dict_of_items[int(input("Please enter the student ID: "))]
+                    student = student_manager.get(int(input("Please enter the student ID: ")))
                     student.phone = input("Please enter the new student phone: ")
                     continue
                 if choice == 3:
-                    student = student_manager.dict_of_items[int(input("Please enter the student ID: "))]
+                    student = student_manager.get(int(input("Please enter the student ID: ")))
                     student.email = input("Please enter the new student email: ")
                     continue
                 if choice == 4:
@@ -72,7 +72,7 @@ def main():
             if choice == 6:
                 choice = int(input("""
                                 1. Set student grade
-                                2. Show student grades
+                                2. Show student grade
                                 3. Show student average grades
                                 4. Back to main menu
                                 5. Exit program
@@ -94,7 +94,7 @@ def main():
                 if choice == 5:
                     break
             if choice == 7:
-                student_manager.show_courses(int(input("Please enter the student ID: ")))
+                student_manager.show_person_courses(int(input("Please enter the student ID: ")))
                 continue
             if choice == 8:
                 continue
@@ -127,24 +127,32 @@ def main():
                             1. Edit teacher name
                             2. Edit teacher phone
                             3. Edit teacher email
-                            4. Back to main menu
-                            5. Exit program
+                            4. Edit teacher salary
+                            5. Back to main menu
+                            6. Exit program
                             Please enter your choice:  """))
                 if choice == 1:
-                    teacher_manager.name(input("Please enter the teacher name: "))
+                    teacher = student_manager.get(int(input("Please enter the teacher ID: ")))
+                    teacher.name = input("Please enter the new teacher name: ")
                     continue
                 if choice == 2:
-                    teacher_manager.name(input("Please enter the teacher phone number: "))
+                    teacher = student_manager.get(int(input("Please enter the teacher ID: ")))
+                    teacher.name = input("Please enter the new teacher phone: ")
                     continue
                 if choice == 3:
-                    teacher_manager.name(input("Please enter the teacher email: "))
+                    teacher = student_manager.get(int(input("Please enter the teacher ID: ")))
+                    teacher.name = input("Please enter the new teacher email: ")
                     continue
                 if choice == 4:
+                    teacher = student_manager.get(int(input("Please enter the teacher ID: ")))
+                    teacher.name = int(input("Please enter the new teacher salary: "))
                     continue
                 if choice == 5:
+                    continue
+                if choice == 6:
                     break
             if choice == 5:
-                teacher_manager.show_courses(int(input("Please enter the teacher ID: ")))
+                teacher_manager.show_person_courses(int(input("Please enter the teacher ID: ")))
                 continue
             if choice == 6:
                 continue
@@ -188,33 +196,35 @@ def main():
                     course_manager.print_items()
                     continue
                 if choice == 3:
-                    print(course_manager.get_course_items(int(input("Enter the course ID: "))),
-                          "teacher")
+                    teacher_id = course_manager.get(int(input("Enter the course ID: "))).teacher_id
+                    print(teacher_manager.get(teacher_id))
                     continue
                 if choice == 4:
-                    print(course_manager.get_course_items(int(input("Enter the course ID: "))),
-                          "students")
+                    course = course_manager.get(int(input("Enter the course ID: ")))
+                    for student in course.students.values():
+                        print(student)
                     continue
                 if choice == 5:
-                    print(course_manager.average(input("Enter the course ID: ")))
+                    print(course_manager.course_average_grades(int(input("Enter the course ID: "))))
                     continue
                 if choice == 6:
                     continue
                 if choice == 7:
                     break
             if choice == 5:
-                choice = int(input("""    1. Add teacher
-                                          2. Set teacher
-                                          3. Back to main menu
-                                          4. Exit program
-                                          Enter your choice:  """))
+                choice = int(input("""   
+                                        1. Add teacher
+                                        2. Set teacher
+                                        3. Back to main menu
+                                        4. Exit program
+                                        Enter your choice:  """))
                 if choice == 1:
-                    course_manager.add_teacher(int(input("Enter the course ID: "),
-                                               int(input("Enter the teacher ID: "))))
+                    course_manager.add_teacher(int(input("Enter the course ID: ")),
+                                               int(input("Enter the teacher ID: ")))
                     continue
                 if choice == 2:
-                    course_manager.set_teacher(int(input("Enter the course ID: "),
-                                               int(input("Enter the teacher ID: "))))
+                    course_manager.set_teacher(int(input("Enter the course ID: ")),
+                                               int(input("Enter the teacher ID: ")))
                     continue
                 if choice == 3:
                     continue
@@ -223,17 +233,17 @@ def main():
             if choice == 6:
                 choice = int(input("""
                                           1. Add student
-                                          2. Set student
+                                          2. Remove student
                                           3. Back to main menu
                                           4. Exit program
                                           Enter your choice:  """))
                 if choice == 1:
-                    course_manager.add_student(int(input("Enter the course ID: "),
-                                               int(input("Enter the teacher ID: "))))
+                    course_manager.add_student(int(input("Enter the course ID: ")),
+                                               int(input("Enter the student ID: ")))
                     continue
                 if choice == 2:
-                    course_manager.set_teacher(int(input("Enter the course ID: "),
-                                               int(input("Enter the student ID: "))))
+                    course_manager.remove_student(int(input("Enter the course ID: ")),
+                                                  int(input("Enter the student ID: ")))
                     continue
                 if choice == 3:
                     continue
@@ -245,9 +255,6 @@ def main():
                 break
         if choice == 4:
             break
-
-
-
     #
     #
     # #  adding teacher to the course
@@ -356,6 +363,15 @@ def main():
     # teacher_manager.add(avi)
     # elad = Teacher('Elad', '054685555', 'elad@gmail.com', 20000)
     # teacher_manager.add(elad)
+    # def get_course_items(self, course_id: int, item):
+    #     """
+    #     Gets the dictionary of items in the course that contains the instances of items.
+    #     :param course_id: The key of the course instance.
+    #     :return: Dictionary of the course items
+    #     :type: dict
+    #     """
+    #     course = self.get(course_id)
+    #     return course.items
 
 
 main()

@@ -5,7 +5,7 @@ class Course:
         self.__name = name
         self.__id = Course.id_auto_increment
         self.__teacher_id = 0
-        self.__students = {}
+        self.students = {}
         Course.id_auto_increment += 1
 
     @property
@@ -27,10 +27,6 @@ class Course:
     @teacher_id.setter
     def teacher_id(self, new_teacher_id):
         self.__teacher_id = new_teacher_id
-
-    @property
-    def students(self):
-        return self.__students
 
     def __str__(self):
         return "ID: " + str(self.id) + ", Name: " + self.name

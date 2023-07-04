@@ -20,11 +20,16 @@ class ManagementCollection:
     def remove_2_arguments(self, instance_id: int, dictionary: dict):
         del dictionary[instance_id]
 
-    def show_courses(self, item_id):
-        for val in item_id.courses.values():
+    def show_person_courses(self, person_id):
+        person_instance = self.get(person_id)
+        for val in person_instance.courses.values():
             print(val.name)
 
     def valid_item(self, item_id):
         if item_id not in self.dict_of_items:
             return False
         return True
+
+    def print_items(self):
+        for item in self.dict_of_items.values():
+            print(item)
