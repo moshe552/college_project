@@ -86,9 +86,9 @@ class CourseManager(ManagementCollection):
         course = self.get(course_id)
         students = course.students
         sum_grades = 0
-        for student in students:
-            for grade in student.grades:
-                sum_grades += grade[course_id]
+        for student in students.values():
+            for grade in student.grades.values():
+                sum_grades += grade
         num_of_students = len(students)
         return sum_grades // num_of_students
 
