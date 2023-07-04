@@ -11,24 +11,6 @@ def main():
     teacher_manager = mivchar.teacher_manager
     course_manager = mivchar.course_manager
 
-    # #  creating Courses instances
-    # math_1 = Course('Math')
-    # course_manager.add(math_1)
-    # english_1 = Course('English')
-    # course_manager.add(english_1)
-    # comp_scie_1 = Course('Computer science')
-    # course_manager.add(comp_scie_1)
-    # comp_scie_2 = Course('Computer science')
-    # course_manager.add(comp_scie_2)
-    #
-    # #  creating Teachers instances
-    # barak = Teacher('Barak', '0546839475', 'barak@gmail.com', 85000)
-    # teacher_manager.add(barak)
-    # avi = Teacher('Avi', '0546839999', 'avi@gmail.com', 30000)
-    # teacher_manager.add(avi)
-    # elad = Teacher('Elad', '054685555', 'elad@gmail.com', 20000)
-    # teacher_manager.add(elad)
-
     while True:
         choice = int(input("""Welcome to Mivchar!
                                  1. Manage students
@@ -132,7 +114,8 @@ def main():
             if choice == 1:
                 teacher_manager.add(Teacher(input("Please enter the teacher name: "),
                                             input("Please enter the teacher phone number: "),
-                                            input("Please enter the teacher email: ")))
+                                            input("Please enter the teacher email: "),
+                                            input("Please enter the teacher salary: ")))
                 continue
             if choice == 2:
                 teacher_manager.remove(int(input("Please enter the teacher ID: ")))
@@ -354,6 +337,24 @@ def main():
     # #  grades of students
     # print(student_manager.get_grade(4, "Math"))
     # print(student_manager.average(4))
+
+    # #  creating Courses instances
+    # math_1 = Course('Math')
+    # course_manager.add(math_1)
+    # english_1 = Course('English')
+    # course_manager.add(english_1)
+    # comp_scie_1 = Course('Computer science')
+    # course_manager.add(comp_scie_1)
+    # comp_scie_2 = Course('Computer science')
+    # course_manager.add(comp_scie_2)
+    #
+    # #  creating Teachers instances
+    # barak = Teacher('Barak', '0546839475', 'barak@gmail.com', 85000)
+    # teacher_manager.add(barak)
+    # avi = Teacher('Avi', '0546839999', 'avi@gmail.com', 30000)
+    # teacher_manager.add(avi)
+    # elad = Teacher('Elad', '054685555', 'elad@gmail.com', 20000)
+    # teacher_manager.add(elad)
 
 
 main()
