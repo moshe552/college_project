@@ -19,10 +19,10 @@ class CourseManager(ManagementCollection):
         super().add(course)
 
     def adding_course(self, course: Course, person_courses: dict):
-        super().adding(course, person_courses)
+        super().add_2_arguments(course, person_courses)
 
     def removing_course(self, course_id: int, person_courses: dict):
-        super().removing(course_id, person_courses)
+        super().remove_2_arguments(course_id, person_courses)
 
     def add_teacher(self, course_id: int, teacher_id: int):
         """
@@ -72,11 +72,13 @@ class CourseManager(ManagementCollection):
         #  Adds the course instance to the student courses dictionary.
         course = self.dict_of_items[course_id]
         self.adding_course(course, student.courses)
+        #  Adds the course ID to the student grades
+        self.student_manager.set_grade(student_id, course_id, 0)
 
     def remove_student(self, course_id: int, student_id: int):
         """
         Removing student instance from the course-students dictionary,
-        and the course from his courses' dictionary.
+        and the course from his courses' dictionary, and the grade from his grades.
         :param course_id: The key of the course
         :param student_id: The key of the student
         :return: None
@@ -86,11 +88,16 @@ class CourseManager(ManagementCollection):
         #  Removing the course instance to the student courses dictionary.
         student_courses = self.student_manager.dict_of_items[student_id].courses
         self.removing_course(course_id, student_courses)
-
-    def average(self, course_id):
-        course = self.dict_of_items[course_id]
-        grades = course.student.grades
-        grades_sum = sum(grades.values())
-        num_of_students = len(grades)
-        return grades_sum // num_of_students
+        #  Removing the course from student grades
+        student = self.student_manager.get(student_id)
+        del student.grades[course_id]
+    def course_average_grades(self, course_id):
+        course = self.get(course_id)
+        students = course.students
+        sum_grades = 0
+        for student in students:
+            for grade in student.grades:
+                sum_grades += grade[course_id]
+        num_of_students = len(students)
+        return sum_grades // num_of_students
 

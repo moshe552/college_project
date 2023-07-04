@@ -11,31 +11,13 @@ def main():
     teacher_manager = mivchar.teacher_manager
     course_manager = mivchar.course_manager
 
-    # #  creating Courses instances
-    # math_1 = Course('Math')
-    # course_manager.add(math_1)
-    # english_1 = Course('English')
-    # course_manager.add(english_1)
-    # comp_scie_1 = Course('Computer science')
-    # course_manager.add(comp_scie_1)
-    # comp_scie_2 = Course('Computer science')
-    # course_manager.add(comp_scie_2)
-    #
-    # #  creating Teachers instances
-    # barak = Teacher('Barak', '0546839475', 'barak@gmail.com', 85000)
-    # teacher_manager.add(barak)
-    # avi = Teacher('Avi', '0546839999', 'avi@gmail.com', 30000)
-    # teacher_manager.add(avi)
-    # elad = Teacher('Elad', '054685555', 'elad@gmail.com', 20000)
-    # teacher_manager.add(elad)
-
     while True:
         choice = int(input("""Welcome to Mivchar!
-         1. manage students
-         2. manage teachers
-         3. manage courses
-         4. Exit program
-         Please enter your choice:  """))
+                                 1. Manage students
+                                 2. Manage teachers
+                                 3. Manage courses
+                                 4. Exit program
+                                 Please enter your choice:  """))
         if choice == 1:
             choice = int(input("""
          1. Add student
@@ -58,6 +40,7 @@ def main():
                 continue
             if choice == 3:
                 print(student_manager.get(int(input("Enter the student ID: "))))
+                continue
             if choice == 4:
                 choice = int(input("""
                 1. Edit student name
@@ -67,13 +50,16 @@ def main():
                 5. Exit program
                  Please enter your choice:  """))
                 if choice == 1:
-                    student_manager.name(input("Please enter the student name: "))
+                    student = student_manager.dict_of_items[int(input("Please enter the student ID: "))]
+                    student.name = input("Please enter the new student name: ")
                     continue
                 if choice == 2:
-                    student_manager.name(input("Please enter the student phone number: "))
+                    student = student_manager.dict_of_items[int(input("Please enter the student ID: "))]
+                    student.phone = input("Please enter the new student phone: ")
                     continue
                 if choice == 3:
-                    student_manager.name(input("Please enter the student email: "))
+                    student = student_manager.dict_of_items[int(input("Please enter the student ID: "))]
+                    student.email = input("Please enter the new student email: ")
                     continue
                 if choice == 4:
                     continue
@@ -89,15 +75,15 @@ def main():
                                 Please enter your choice:  """))
                 if choice == 1:
                     student_manager.set_grade(int(input("Please enter the student ID: ")),
-                                              input("Please enter the course name: "),
-                                              input("Please enter the grade: ") )
+                                              int(input("Please enter the course ID: ")),
+                                              int(input("Please enter the grade: ")))
                     continue
                 if choice == 2:
-                    student_manager.get_grade(int(input("Please enter the student ID: ")),
-                                              input("Please enter the course name: "))
+                    print(student_manager.get_grade(int(input("Please enter the student ID: ")),
+                                                    int(input("Please enter the course ID: "))))
                     continue
                 if choice == 3:
-                    student_manager.average(int(input("Please enter the student ID: ")))
+                    print(student_manager.grades_average(int(input("Please enter the student ID: "))))
                     continue
                 if choice == 4:
                     continue
@@ -124,7 +110,8 @@ def main():
             if choice == 1:
                 teacher_manager.add(Teacher(input("Please enter the teacher name: "),
                                             input("Please enter the teacher phone number: "),
-                                            input("Please enter the teacher email: ")))
+                                            input("Please enter the teacher email: "),
+                                            input("Please enter the teacher salary: ")))
                 continue
             if choice == 2:
                 teacher_manager.remove(int(input("Please enter the teacher ID: ")))
@@ -346,6 +333,24 @@ def main():
     # #  grades of students
     # print(student_manager.get_grade(4, "Math"))
     # print(student_manager.average(4))
+
+    # #  creating Courses instances
+    # math_1 = Course('Math')
+    # course_manager.add(math_1)
+    # english_1 = Course('English')
+    # course_manager.add(english_1)
+    # comp_scie_1 = Course('Computer science')
+    # course_manager.add(comp_scie_1)
+    # comp_scie_2 = Course('Computer science')
+    # course_manager.add(comp_scie_2)
+    #
+    # #  creating Teachers instances
+    # barak = Teacher('Barak', '0546839475', 'barak@gmail.com', 85000)
+    # teacher_manager.add(barak)
+    # avi = Teacher('Avi', '0546839999', 'avi@gmail.com', 30000)
+    # teacher_manager.add(avi)
+    # elad = Teacher('Elad', '054685555', 'elad@gmail.com', 20000)
+    # teacher_manager.add(elad)
 
 
 main()
