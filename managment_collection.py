@@ -28,3 +28,4 @@ class ManagementCollection:
         if item_id not in self.dict_of_items:
             return False
         return True
+

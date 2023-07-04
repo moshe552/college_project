@@ -41,11 +41,12 @@ def main():
          1. Add student
          2. Remove student
          3. Show student details
-         4. Edit student details
-         5. Student grades
-         6. Show students courses
-         7. Back to main menu
-         8. Exit program
+         4. Show all students
+         5. Edit student details
+         6. Student grades
+         7. Show students courses
+         8. Back to main menu
+         9. Exit program
          Please enter your choice:  """))
             if choice == 1:
                 print("Enter student details:")
@@ -60,6 +61,9 @@ def main():
                 print(student_manager.get(int(input("Enter the student ID: "))))
                 continue
             if choice == 4:
+                pass
+                continue
+            if choice == 5:
                 choice = int(input("""
                 1. Edit student name
                 2. Edit student phone
@@ -83,7 +87,7 @@ def main():
                     continue
                 if choice == 5:
                     break
-            if choice == 5:
+            if choice == 6:
                 choice = int(input("""
                                 1. Set student grade
                                 2. Show student grades
@@ -107,12 +111,12 @@ def main():
                     continue
                 if choice == 5:
                     break
-            if choice == 6:
+            if choice == 7:
                 student_manager.show_courses(int(input("Please enter the student ID: ")))
                 continue
-            if choice == 7:
-                continue
             if choice == 8:
+                continue
+            if choice == 9:
                 break
 
         if choice == 2:
