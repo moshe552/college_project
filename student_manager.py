@@ -10,14 +10,26 @@ class StudentManager(ManagementCollection):
     def add(self, student: Student):
         super().add(student)
 
-    def set_grade(self, student_id, course, grade):
-        self.dict_of_items[student_id].grades[course] = grade
+    def set_grade(self, student_id: int, course_id: int, grade: int):
+        if self.valid_item(student_id):
+            student = self.get(student_id)
+            if course_id in student.courses:
+                self.dict_of_items[student_id].grades[course_id] = grade
+            else:
+                print("The student isn't participate in this course.")
+        else:
+            print("The student isn't exists.")
 
-    def get_grade(self, student_id, course):
-        return self.dict_of_items[student_id].grades[course]
+    def get_grade(self, student_id: int, course_id: int):
+        if self.valid_item(student_id):
+            student = self.get(student_id)
+            if course_id in student.courses:
+                return student.grades[course_id]
+            return "The student isn't participate in this course."
+        return "The student isn't exists."
 
-    def average(self, student_id):
-        student = self.dict_of_items[student_id]
+    def grades_average(self, student_id: int):
+        student = self.get(student_id)
         grades = student.grades
         grades_sum = sum(grades.values())
         num_of_courses = len(grades)
